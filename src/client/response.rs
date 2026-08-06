@@ -149,7 +149,7 @@ impl FcmResponse {
     }
 
     /// If `None` then [crate::message::Message] is sent successfully.
-    pub fn recommended_error_handling_action(&self) -> Option<RecomendedAction> {
+    pub fn recommended_error_handling_action(&self) -> Option<RecomendedAction<'_>> {
         RecomendedAction::analyze(self)
     }
 
@@ -219,9 +219,9 @@ pub enum RecomendedAction<'a> {
 }
 
 impl RecomendedAction<'_> {
-    fn analyze(response: &FcmResponse) -> Option<RecomendedAction> {
+    fn analyze(response: &FcmResponse) -> Option<RecomendedAction<'_>> {
         let action = match response.error()? {
-            FcmResponseError::Unspecified | FcmResponseError::Unknown { .. } => RecomendedAction::HandleUnknownError,
+            FcmResponseError::Unspecified | FcmResponseError::Unknown => RecomendedAction::HandleUnknownError,
             FcmResponseError::Unregistered => RecomendedAction::RemoveFcmAppToken,
             FcmResponseError::InvalidArgument => RecomendedAction::FixMessageContent,
             FcmResponseError::SenderIdMismatch => RecomendedAction::CheckSenderIdEquality,

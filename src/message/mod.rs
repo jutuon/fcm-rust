@@ -96,7 +96,7 @@ pub(crate) struct MessageWrapper<'a> {
 }
 
 impl MessageWrapper<'_> {
-    pub fn new(message: &Message, dry_run: bool) -> MessageWrapper {
+    pub fn new(message: &Message, dry_run: bool) -> MessageWrapper<'_> {
         MessageWrapper {
             validate_only: dry_run,
             message,
