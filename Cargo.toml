@@ -16,23 +16,21 @@ keywords = ["fcm", "firebase", "notification"]
 edition = "2018"
 
 [features]
-default = ["native-tls"]
+default = ["rustls"]
 
 native-tls = ["reqwest/native-tls", "yup-oauth2/hyper-tls"]
-native-tls-vendored = ["reqwest/native-tls-vendored", "yup-oauth2/hyper-tls"]
-rustls-tls = ["reqwest/rustls-tls", "yup-oauth2/hyper-rustls"]
-rustls-tls-native-roots = ["reqwest/rustls-tls-native-roots", "yup-oauth2/hyper-rustls"]
+rustls = ["reqwest/rustls", "yup-oauth2/hyper-rustls"]
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["preserve_order"] }
-tokio = { version = "1", features = ["fs"] }
-reqwest = { version = "0.12", features = ["json", "charset", "http2", "macos-system-configuration"], default-features = false }
+tokio = { version = "1.53", features = ["fs"] }
+reqwest = { version = "0.13", features = ["json", "charset", "http2", "system-proxy"], default-features = false }
 chrono = "0.4"
-thiserror = "1"
+thiserror = "2"
 dotenvy = "0.15"
-yup-oauth2 = { version = "11", features = ["service-account", "ring"], default-features = false }
+yup-oauth2 = { version = "12.1", features = ["service-account", "aws-lc-rs"], default-features = false }
 
 [dev-dependencies]
-tokio = { version = "1.0", features = ["rt-multi-thread", "macros"] }
-clap = { version = "4.5", features = ["cargo", "derive"] }
+tokio = { version = "1.53", features = ["rt-multi-thread", "macros"] }
+clap = { version = "4.6", features = ["cargo", "derive"] }

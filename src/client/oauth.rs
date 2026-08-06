@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
-use yup_oauth2::authenticator::{Authenticator, DefaultHyperClient, HyperClientBuilder};
-use yup_oauth2::ServiceAccountAuthenticator;
+use yup_oauth2::authenticator::Authenticator;
+use yup_oauth2::{DefaultHyperClientBuilder, HyperClientBuilder, ServiceAccountAuthenticator};
 
 const FIREBASE_OAUTH_SCOPE: &str = "https://www.googleapis.com/auth/firebase.messaging";
 
@@ -32,7 +32,7 @@ impl OauthError {
 }
 
 pub(crate) struct OauthClient {
-    authenticator: Authenticator<<DefaultHyperClient as HyperClientBuilder>::Connector>,
+    authenticator: Authenticator<<DefaultHyperClientBuilder as HyperClientBuilder>::Connector>,
     project_id: String,
 }
 
